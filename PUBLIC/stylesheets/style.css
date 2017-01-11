@@ -12,9 +12,29 @@ a {
   display: flex;
   justify-content: flex-start;
   align-items: center;
+  background-color: white;
+  margin-bottom: 10%;
+  border-top: 1px solid black;
+  border-bottom: 1px solid black;
 }
 .book_logo {
   height: 10%;
   width: 20%;
   margin-right: -3%;
+}
+.book_cover{
+  margin-bottom: 10%;
+  width: 75%;
+}
+.home_pic{
+  width: 90%;
+  height: 50%;
+}
+#author{
+  width: 79%;
+}
+img:hover{
+  border-radius: 50%;
+  transition: 1s;
+  opacity: .5;
 }
