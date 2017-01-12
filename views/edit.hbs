@@ -14,7 +14,7 @@
     </a>
 </div>
 
-<form class="box center-block" method="post" action="/books/new">
+<form class="box center-block" method="post" action="/books/{{id}}?_method=put">
   <div class="form-group">
     <label for="title">Title:</label>
     <input id="title" type="text" class="form-control" placeholder="Title" name="title" >
@@ -50,8 +50,7 @@
   <label class="custom-control custom-checkbox mb-2 mr-sm-2 mb-sm-0">
     <span class="custom-control-indicator"></span>
   </label>
-  <button type="submit" class="btn btn-primary">Add author</button>
+  <button type="submit" class="btn btn-primary">Update author</button>
 
-
-  <button type="submit" class="bot box center-block btn btn-success">Add Book</button>
+  <button type="submit" class="bot box center-block btn btn-success">Update Book</button>
 </form>

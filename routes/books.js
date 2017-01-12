@@ -9,7 +9,18 @@ router.get('/', function(req, res, next) {
     res.render('books', {books: books})
   })
 });
-
+// DELETE
+router.get('/:id/delete', function(req, res, next) {
+  queries.getOneBook(req.params.id).then(function(books) {
+    res.render('delete', {books: books})
+  })
+});
+router.delete('/:id/delete', function(req, res, next) {
+  knex('books').where('id', req.params.id).first().del()
+  .then(()=>{
+    res.redirect('/books')
+  })
+})
 
 // router.get('/new', function(req, res, next) {
 //   knex('books')
@@ -23,11 +34,32 @@ router.get('/', function(req, res, next) {
 //     res.render('addbook')
 //   })
 // });
-
-router.get('/new', function(req, res, next) {
-  knex('books').then(books=> res.render('addbook'))
+// PUT or UPDATE
+router.get('/:id/edit', function(req, res, next) {
+  res.render('edit')
+})
+router.put('/:id/edit', function(req, res, next)  {
+  var book_body = {
+    id: req.params.id,
+    title: req.body.title,
+    genera: req.body.genera,
+    description: req.body.description,
+    img: req.body.img
+  }
+  if (validate(req.body)) {
+      queries.newBook(book_body).then(function(result){
+      res.render('books')
+      // res.redirect(/:id)
+    })
+  } else {
+    next(new Error('😡'));
+  }
 })
 
+// POST
+router.get('/new', function(req, res, next) {
+  knex('books').then(books => res.render('addbook'))
+})
 router.post('/new', function(req, res, next)  {
   var book_body = {
     title: req.body.title,
@@ -35,9 +67,9 @@ router.post('/new', function(req, res, next)  {
     description: req.body.description,
     img: req.body.img
   }
-  if (req.body.title.trim().length > 0 && req.body.genera.trim().length > 0) {
+  if (validate(req.body)) {
       queries.newBook(book_body).then(function(result){
-      res.send(result)
+      res.redirect('/books')
       // res.redirect(/:id)
     })
   } else {
@@ -45,7 +77,12 @@ router.post('/new', function(req, res, next)  {
   }
 })
 
-
+function validate(book){
+  return typeof book.title == 'string' &&
+  book.title.trim() != '' &&
+  typeof book.genera == 'string' &&
+  book.genera.trim() != '';
+}
 
 
 

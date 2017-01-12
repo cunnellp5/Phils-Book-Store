@@ -8,7 +8,15 @@ module.exports = {
   newBook: function(obj){
       return knex('books').returning('id').insert(obj);
   },
-
+  deleteBook: function(id){
+    knex('books').where('id', id).first().del();
+  },
+  editBook: function(obj){
+    return knex('books').where('id', obj.id).returning('id').update(obj);
+  },
+  getOneBook: function(id)   {
+    return knex('books').where("id", id).select('*').first();
+  },
 //     getBrewery: function(brewery_id){
 //         // Return a promise that gets one brewery that matches the id
 //         return knex.select().from('brewery').where('id', brewery_id);

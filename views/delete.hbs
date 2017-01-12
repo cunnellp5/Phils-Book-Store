@@ -1,0 +1,17 @@
+  <div class="row spacer" id="{{id}}">
+    <div class="col-xs-2">
+    </div>
+    <div class="col-xs-2">
+      <img class="book_cover" src="{{books.img}}" alt="book covers">
+    </div>
+    <div class="col-xs-6">
+      <form action="/books/{{books.id}}/delete?_method=delete" method="post" >
+        <button class="btn btn-danger">
+          DELETE
+        </button>
+      </form>
+      <h2>{{books.title}}</h2>
+      <h4>{{books.genera}}</h4>
+      <p>{{books.description}}</p>
+    </div>
+  </div>
