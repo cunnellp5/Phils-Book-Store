@@ -1,10 +1,14 @@
 const knex = require('./db/knex');
 
 module.exports = {
-    getBooks: function(){
-        // Return a promise that gets all books
-        return knex.select().from('books');
-    },
+  getBooks: function(){
+      // Return a promise that gets all books
+      return knex.select().from('books');
+  },
+  newBook: function(obj){
+      return knex('books').returning('id').insert(obj);
+  },
+
 //     getBrewery: function(brewery_id){
 //         // Return a promise that gets one brewery that matches the id
 //         return knex.select().from('brewery').where('id', brewery_id);
