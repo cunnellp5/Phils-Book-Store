@@ -10,6 +10,12 @@ router.get('/', function(req, res, next) {
   })
 });
 
+router.get('/:id', function(req, res, next) {
+  queries.getOneBook(req.params.id).then(function(books) {
+    res.render('single', {books: books})
+  })
+});
+
 // DELETE
 router.get('/:id/delete', function(req, res, next) {
   queries.getOneBook(req.params.id).then(function(books) {
