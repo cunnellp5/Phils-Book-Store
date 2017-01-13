@@ -9,6 +9,7 @@ router.get('/', function(req, res, next) {
     res.render('books', {books: books})
   })
 });
+
 // DELETE
 router.get('/:id/delete', function(req, res, next) {
   queries.getOneBook(req.params.id).then(function(books) {
@@ -36,19 +37,20 @@ router.delete('/:id/delete', function(req, res, next) {
 // });
 // PUT or UPDATE
 router.get('/:id/edit', function(req, res, next) {
-  res.render('edit')
+  queries.getOneBook(req.params.id).then(function(books)  {
+    res.render('edit', {books:books})
+  })
 })
 router.put('/:id/edit', function(req, res, next)  {
   var book_body = {
-    id: req.params.id,
     title: req.body.title,
     genera: req.body.genera,
     description: req.body.description,
     img: req.body.img
   }
   if (validate(req.body)) {
-      queries.newBook(book_body).then(function(result){
-      res.render('books')
+      queries.editBook(book_body, req.params.id).then(function(result){
+      res.redirect('/books')
       // res.redirect(/:id)
     })
   } else {

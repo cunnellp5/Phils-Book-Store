@@ -5,7 +5,7 @@
         <p>Authors</p>
       </div>
     </div>
-    <a href="./">
+    <a href="/books">
       <div class="read btn btn-default row col-xs-2">
         <div class="center-block col-xs-6">
           <p>Books</p>
@@ -14,7 +14,25 @@
     </a>
 </div>
 
-<form class="box center-block" method="post" action="/books/{{id}}?_method=put">
+<div class="row spacer" id="{{id}}">
+  <div class="col-xs-2">
+  </div>
+  <div class="col-xs-2">
+    <img class="book_cover" src="{{books.img}}" alt="book covers">
+  </div>
+  <div class="col-xs-6">
+    <!-- <form action="/books/{{books.id}}/delete?_method=delete" method="post" >
+      <button class="btn btn-danger">
+        DELETE
+      </button>
+    </form> -->
+    <h2>{{books.title}}</h2>
+    <h4>{{books.genera}}</h4>
+    <p>{{books.description}}</p>
+  </div>
+</div>
+
+<form class="box center-block" method="post" action="/books/{{books.id}}/edit?_method=put">
   <div class="form-group">
     <label for="title">Title:</label>
     <input id="title" type="text" class="form-control" placeholder="Title" name="title" >

@@ -11,8 +11,8 @@ module.exports = {
   deleteBook: function(id){
     knex('books').where('id', id).first().del();
   },
-  editBook: function(obj){
-    return knex('books').where('id', obj.id).returning('id').update(obj);
+  editBook: function(obj, id){
+    return knex('books').where('id', id).update(obj);
   },
   getOneBook: function(id)   {
     return knex('books').where("id", id).select('*').first();
