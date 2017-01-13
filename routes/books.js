@@ -9,12 +9,21 @@ router.get('/', function(req, res, next) {
     res.render('books', {books: books})
   })
 });
-
+router.get('/new', function(req, res, next) {
+  queries.getBooks().then(function(books) {
+    res.render('addbook', {books: books})
+  })
+});
 router.get('/:id', function(req, res, next) {
   queries.getOneBook(req.params.id).then(function(books) {
     res.render('single', {books: books})
   })
 });
+router.get('/:id/edit', function(req, res, next) {
+  queries.getOneBook(req.params.id).then(function(books)  {
+    res.render('edit', {books:books})
+  })
+})
 
 // DELETE
 router.get('/:id/delete', function(req, res, next) {
@@ -42,11 +51,7 @@ router.delete('/:id/delete', function(req, res, next) {
 //   })
 // });
 // PUT or UPDATE
-router.get('/:id/edit', function(req, res, next) {
-  queries.getOneBook(req.params.id).then(function(books)  {
-    res.render('edit', {books:books})
-  })
-})
+
 router.put('/:id/edit', function(req, res, next)  {
   var book_body = {
     title: req.body.title,
@@ -64,10 +69,13 @@ router.put('/:id/edit', function(req, res, next)  {
   }
 })
 
+
+
+
 // POST
-router.get('/new', function(req, res, next) {
-  knex('books').then(books => res.render('addbook'))
-})
+// router.get('/new', function(req, res, next) {
+//   knex('books').then(books => res.render('addbook'))
+// })
 router.post('/new', function(req, res, next)  {
   var book_body = {
     title: req.body.title,
