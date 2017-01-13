@@ -1,13 +1,13 @@
 
 <div class="row">
-  <a href="./authors">
+  <a href="/authors">
     <div class="read btn btn-primary row col-xs-2">
       <div class="center-block col-xs-6">
         <p>Authors</p>
       </div>
     </div>
   </a>
-    <a href="./books">
+    <a href="/books">
       <div class="read btn btn-primary row col-xs-2">
         <div class="center-block col-xs-6">
           <p>Books</p>
@@ -15,29 +15,29 @@
       </div>
     </a>
 </div>
-  <a href="/books/new">
-    <button class="bot box center-block btn btn-success">Add Book</button>
+  <a href="/author/new">
+    <button class="bot box center-block btn btn-success">Add Author</button>
   </a>
-{{#each books}}
+{{#each authors}}
 <hr>
   <div class="row spacer" id="{{id}}">
     <div class="col-xs-2">
     </div>
     <div class="col-xs-2">
-      <img class="book_cover" src="{{img}}" alt="book covers">
+      <img class="portrait" src="{{img}}" alt="Faces">
     </div>
     <div class="col-xs-6">
-      <a href="/books/{{id}}/delete">
+      <a href="/authors/{{id}}/delete">
         <input class="space pull-right btn btn-danger" type="button" value="Delete">
       </a>
-      <a href="/books/{{id}}/edit">
+      <a href="/authors/{{id}}/edit">
       <input class="space pull-right btn btn-info" type="button" value="Edit">
       </a>
-      <a href="/books/{{id}}">
-        <h2>{{title}}</h2>
+      <a href="/authors/{{id}}">
+        <h2>{{firstname}}" "{{lastname}}</h2>
       </a>
       <h4>{{genera}}</h4>
-      <p>{{description}}</p>
+      <p>{{bio}}</p>
     </div>
   </div>
 {{/each}}
