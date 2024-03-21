@@ -7,8 +7,8 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "concurrently \"npm run server:dev\" \"npm run client:dev\"",
     "client:dev": "vite",
-    "server:dev": "RUN_INIT=false nodemon src/server.js",
-    "server:dev:init-db": "RUN_INIT=true nodemon src/server.js",
+    "server:dev": "SEED_DB=false nodemon src/server.js",
+    "server:dev:init-db": "SEED_DB=true nodemon src/server.js",
     "serve": "vite preview",
     "start": "node dist/server.js"
   },
