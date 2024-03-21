@@ -38,9 +38,9 @@ router.delete("/todos/:id", async (req, res) => {
 router.patch("/todos/:id", async (req, res) => {
   try {
     const { id } = req.params;
-    const { completed } = req.body;
+    const { completed, description } = req.body;
     const todo = await Todo.findByPk(id);
-    await todo?.update({ completed });
+    await todo?.update({ completed, description });
     res.sendStatus(201);
   } catch (error) {
     res.status(500).send(error.message);

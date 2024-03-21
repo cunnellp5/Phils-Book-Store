@@ -44,6 +44,11 @@ function App() {
     API.getTodos().then(setTodos);
   }, []);
 
+  const handleUpdate = useCallback(async (id: number, description: string) => {
+    await API.updateTodo(id, description);
+    API.getTodos().then(setTodos);
+  }, []);
+
   return (
     <Wrapper>
       <Header>Todo List</Header>
@@ -55,7 +60,7 @@ function App() {
             todo={todo}
             toggle={handleChange}
             onDelete={handleDelete}
-            // onEdit={editTodo}
+            updateTodo={handleUpdate}
           />
         ))}
       </TodoList>

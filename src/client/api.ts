@@ -1,3 +1,7 @@
+const headers = {
+  "Content-Type": "application/json",
+};
+
 export async function getTodos() {
   const resp = await fetch("/api/todos");
   if (resp.ok) {
@@ -10,9 +14,7 @@ export async function getTodos() {
 export async function addTodo(description: string) {
   const resp = await fetch("/api/todos", {
     method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
+    headers,
     body: JSON.stringify({ description }),
   });
   if (resp.ok) {
@@ -35,12 +37,24 @@ export async function deleteTodo(id: number) {
 }
 
 export async function toggleTodo(id: number, isCompleted: boolean) {
-  // Implement me!
   const resp = await fetch(`/api/todos/${id}`, {
     method: "PATCH",
-    headers: {
-      "Content-Type": "application/json",
-    },
+    headers,
     body: JSON.stringify({ completed: isCompleted }),
   });
+}
+
+export async function updateTodo(id: number, description: string) {
+  const resp = await fetch(`/api/todos/${id}`, {
+    method: "PATCH",
+    headers,
+    body: JSON.stringify({ description: description }),
+  });
+
+  console.log(resp, " wttfffffff");
+  if (resp.ok) {
+    return true;
+  }
+
+  throw new Error("Unable to edit todo");
 }
