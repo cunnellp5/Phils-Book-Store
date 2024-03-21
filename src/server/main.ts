@@ -24,15 +24,17 @@ const start = async () => {
     port: process.env.DB_PORT,
   });
 
-  // init the models in the db
-  initAuthor(sequelize);
-  initBook(sequelize);
-  initAuthorBook(sequelize);
-  initTodo(sequelize);
+  if (process.env.RUN_INIT === "true") {
+    // init the models in the db
+    initAuthor(sequelize);
+    initBook(sequelize);
+    initAuthorBook(sequelize);
+    initTodo(sequelize);
 
-  // create relationships
-  Author.belongsToMany(Book, { through: AuthorBook });
-  Book.belongsToMany(Author, { through: AuthorBook });
+    // create relationships
+    Author.belongsToMany(Book, { through: AuthorBook });
+    Book.belongsToMany(Author, { through: AuthorBook });
+  }
 
   const { serve, app } = await createServer();
 
@@ -44,7 +46,7 @@ const start = async () => {
   app.use("/api", APIRoutes);
 
   sequelize.sync().then(async () => {
-    await seedData();
+    process.env.RUN_INIT === "true" && (await seedData());
     serve();
   });
 };
