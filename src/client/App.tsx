@@ -15,7 +15,7 @@ const Wrapper = styled.div({
   display: "flex",
   flexDirection: "column",
   alignItems: "center",
-  width: 300,
+  width: 500,
 });
 
 function App() {
@@ -39,13 +39,24 @@ function App() {
     API.getTodos().then(setTodos);
   }, []);
 
+  const handleDelete = useCallback(async (id: number) => {
+    await API.deleteTodo(id);
+    API.getTodos().then(setTodos);
+  }, []);
+
   return (
     <Wrapper>
       <Header>Todo List</Header>
       <AddInput onAdd={addTodo} />
       <TodoList>
-        {todos.map((todo) => (
-          <TodoItem todo={todo} toggle={handleChange} />
+        {todos.map((todo, i) => (
+          <TodoItem
+            key={i}
+            todo={todo}
+            toggle={handleChange}
+            onDelete={handleDelete}
+            // onEdit={editTodo}
+          />
         ))}
       </TodoList>
       <Link to={`books`}>Books</Link>

@@ -1,6 +1,7 @@
 import React, { FC } from "react";
 import styled from "@emotion/styled";
 import { Todo } from "../../server/models/Todo";
+import "./TodoItem.css";
 
 export const Wrapper = styled.label({
   display: "flex",
@@ -35,9 +36,10 @@ const Checkbox = styled.input({
 export interface TodoItemProps {
   todo: Todo;
   toggle?: (id: number, isCompleted: boolean) => void;
+  onDelete?: (id: number) => void;
 }
 
-export const TodoItem: FC<TodoItemProps> = ({ todo, toggle }) => {
+export const TodoItem: FC<TodoItemProps> = ({ todo, toggle, onDelete }) => {
   const { id, completed, description } = todo;
 
   const handleToggle = (e: { target: { checked: any } }) => {
@@ -48,6 +50,13 @@ export const TodoItem: FC<TodoItemProps> = ({ todo, toggle }) => {
       !!e.target.checked
     );
   };
+
+  const handleDelete = () => {
+    if (onDelete) {
+      onDelete(id);
+    }
+  };
+
   return (
     <Wrapper>
       <Checkbox
@@ -57,6 +66,10 @@ export const TodoItem: FC<TodoItemProps> = ({ todo, toggle }) => {
         onChange={handleToggle}
       />
       <Label checked={completed}>{description}</Label>
+      <div className="buttonsWrapper">
+        <button>Edit</button>
+        <button onClick={handleDelete}>❌</button>
+      </div>
     </Wrapper>
   );
 };
