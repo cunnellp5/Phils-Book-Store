@@ -79,8 +79,11 @@ export const TodoItem: FC<TodoItemProps> = ({
   if (editing) {
     return (
       <Wrapper>
-        <EditInput updateTodo={handleUpdate} description={description} />
-        <button onClick={handleEdit}>nvm</button>
+        <EditInput
+          updateTodo={handleUpdate}
+          description={description}
+          closeEditor={handleEdit}
+        />
       </Wrapper>
     );
   }

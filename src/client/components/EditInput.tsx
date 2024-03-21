@@ -3,6 +3,7 @@ import styled from "@emotion/styled";
 
 const Form = styled.form({
   width: "100%",
+  display: "flex",
 });
 
 const Input = styled.input({
@@ -14,9 +15,14 @@ const Input = styled.input({
 export interface EditInputProps {
   updateTodo: (label: string) => void;
   description: string;
+  closeEditor: (e: { preventDefault: () => void }) => void;
 }
 
-export const EditInput: FC<EditInputProps> = ({ description, updateTodo }) => {
+export const EditInput: FC<EditInputProps> = ({
+  description,
+  updateTodo,
+  closeEditor,
+}) => {
   const [input, setInput] = useState(description);
 
   return (
@@ -31,6 +37,12 @@ export const EditInput: FC<EditInputProps> = ({ description, updateTodo }) => {
         value={input}
         placeholder={description}
       />
+      <div className="buttonsWrapper">
+        <button type="submit">update</button>
+        <button type="button" onClick={closeEditor}>
+          nvm
+        </button>
+      </div>
     </Form>
   );
 };
