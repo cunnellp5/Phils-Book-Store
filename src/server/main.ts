@@ -3,6 +3,12 @@ import { Sequelize } from "sequelize";
 import bodyParser from "body-parser";
 
 import { initTodo } from "./models/Todo";
+import { initAuthor, Author } from "./models/Author";
+import { initBook, Book } from "./models/Book";
+import { initAuthorBook, AuthorBook } from "./models/AuthorBook";
+
+import { seedData } from "./Seeds/index";
+
 import APIRoutes from "./routes/api";
 
 import dotenv from "dotenv";
@@ -18,7 +24,15 @@ const start = async () => {
     port: process.env.DB_PORT,
   });
 
+  // init the models in the db
+  initAuthor(sequelize);
+  initBook(sequelize);
+  initAuthorBook(sequelize);
   initTodo(sequelize);
+
+  // create relationships
+  Author.belongsToMany(Book, { through: AuthorBook });
+  Book.belongsToMany(Author, { through: AuthorBook });
 
   const { serve, app } = await createServer();
 
@@ -29,7 +43,8 @@ const start = async () => {
   app.use(bodyParser.json());
   app.use("/api", APIRoutes);
 
-  sequelize.sync().then(() => {
+  sequelize.sync().then(async () => {
+    await seedData();
     serve();
   });
 };
