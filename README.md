@@ -27,3 +27,25 @@ Use the API Requests tab in the right pane to make requests to the API endpoints
 npx sequelize-cli migration:generate --name name_of_migration
 
 npx sequelize-cli db:migrate
+
+## start:
+
+- $ npm i
+
+<!-- DB SET UP Begin-->
+
+- set up your db
+  - install psql or whatever dB you wnat
+  - configure your env vars that will go in the main.ts file to initialize the Sequelize ORM:
+  ```
+    DB_TYPE,
+    DB_NAME,
+    DB_USERNAME,
+    DB_PASSWORD,
+    DB_HOST,
+    DB_PORT,
+  ```
+  - and add your own config.json for the `sequelize-cli` when/if running migrations
+  <!-- DB SET UP end -->
+
+* $ npm run server:dev
