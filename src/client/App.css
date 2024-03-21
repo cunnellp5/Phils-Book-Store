@@ -1,6 +1,6 @@
 html,
 body {
-  background: #000000;
+  background: linear-gradient(to bottom, #141414, #ab543e);
   font-size: 1.1rem;
   font-family: "Roboto", Arial, sans-serif;
   height: 100%;

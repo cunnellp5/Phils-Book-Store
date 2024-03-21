@@ -51,7 +51,6 @@ export async function updateTodo(id: number, description: string) {
     body: JSON.stringify({ description: description }),
   });
 
-  console.log(resp, " wttfffffff");
   if (resp.ok) {
     return true;
   }
