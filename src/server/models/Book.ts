@@ -1,4 +1,5 @@
 import { DataTypes, Model, Sequelize } from "sequelize";
+import { Author } from "./Author";
 
 export class Book extends Model {}
 
@@ -7,6 +8,7 @@ export interface Book {
   title: string;
   genera: string;
   img: string;
+  authors: Author[];
 }
 
 export function initBook(sequelize: Sequelize) {
