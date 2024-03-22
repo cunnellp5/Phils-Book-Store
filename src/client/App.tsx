@@ -24,7 +24,6 @@ function App() {
       }
       return 0;
     });
-    console.log("sorted", sorted);
     setTodos(sorted);
   }
 

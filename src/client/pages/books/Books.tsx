@@ -36,6 +36,12 @@ const BooksDataInfo = styled.p({
   marginLeft: 8,
 });
 
+const BooksImg = styled.img({
+  width: 100,
+  height: 100,
+  backgroundColor: "#ffcfb0",
+});
+
 function Books() {
   const [books, setBooks] = useState<Book[]>([]);
 
@@ -55,7 +61,7 @@ function Books() {
         {books.map((book) => {
           return (
             <BooksItem key={`${book.id}-frag`}>
-              <img src={book.img} alt="images" />
+              <BooksImg src={book.img} alt={book.title} />
               <div>
                 <BooksData>
                   <BooksDataLabel>Title</BooksDataLabel>
