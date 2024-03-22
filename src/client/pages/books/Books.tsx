@@ -76,9 +76,6 @@ function Books() {
       ) : (
         <BooksList key="booksList">
           {books.map((book) => {
-            {
-              console.log(book);
-            }
             return (
               <BooksItem key={`${book.id}-frag`}>
                 <BooksImg
