@@ -3,8 +3,8 @@ import ReactDOM from "react-dom/client";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
 import App from "./App";
-import Books from "./pages/Books";
-import Authors from "./pages/Authors";
+import Books from "./pages/books/Books";
+import Authors from "./pages/authors/Authors";
 
 const router = createBrowserRouter([
   {

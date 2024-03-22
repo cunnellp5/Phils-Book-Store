@@ -2,7 +2,7 @@ import React, { FC, useState } from "react";
 import styled from "@emotion/styled";
 import { Todo } from "../../server/models/Todo";
 import { EditInput } from "./EditInput";
-import "./~TodoItem.module.css";
+import "./~TodoItem.css";
 
 export const Wrapper = styled.label({
   display: "flex",

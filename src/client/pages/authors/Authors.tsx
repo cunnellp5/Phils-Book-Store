@@ -1,8 +1,8 @@
 import React from "react";
 import styled from "@emotion/styled";
 
-import { Wrapper } from "../components/~Wrapper";
-import Nav from "../components/Nav";
+import { Wrapper } from "../../components/~Wrapper";
+import Nav from "../../components/Nav";
 
 export const AuthorsStyled = styled.div({
   width: "100%",
