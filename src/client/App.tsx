@@ -1,44 +1,15 @@
 import React, { useCallback, useEffect, useState } from "react";
-import styled from "@emotion/styled";
 import { AddInput } from "./components/AddInput";
 import { TodoItem } from "./components/TodoItem";
 import { TodoList } from "./components/TodoList";
 import { Header } from "./components/Header";
 
+import { Wrapper } from "./components/~Wrapper";
 import "./App.css";
 
 import * as TodoAPI from "./api/todos";
 import { Todo } from "../server/models/Todo";
-import { Link } from "react-router-dom";
-
-const Wrapper = styled.div({
-  display: "flex",
-  flexDirection: "column",
-  alignItems: "center",
-  width: 500,
-});
-
-const LinkButtons = styled.div`
-  display: flex;
-  flex-direction: column;
-  /* justify-content: space-between; */
-  width: 100%;
-  padding: 2rem 5rem;
-
-  & > a {
-    margin: 0.2rem;
-    text-align: center;
-    text-decoration: none;
-    color: black;
-    background-color: lightgray;
-    padding: 0.5rem 1.5rem;
-  }
-
-  & > a:hover {
-    background-color: gray;
-    color: white;
-  }
-`;
+import Nav from "./components/Nav";
 
 function App() {
   const [todos, setTodos] = useState<Todo[]>([]);
@@ -53,6 +24,7 @@ function App() {
       }
       return 0;
     });
+    console.log("sorted", sorted);
     setTodos(sorted);
   }
 
@@ -96,6 +68,7 @@ function App() {
 
   return (
     <Wrapper>
+      <Nav></Nav>
       <Header>Todo List</Header>
       <AddInput onAdd={addTodo} />
       <TodoList>
@@ -109,10 +82,6 @@ function App() {
           />
         ))}
       </TodoList>
-      <LinkButtons>
-        <Link to={`books`}>Books</Link>
-        <Link to={`authors`}>Authors</Link>
-      </LinkButtons>
     </Wrapper>
   );
 }
