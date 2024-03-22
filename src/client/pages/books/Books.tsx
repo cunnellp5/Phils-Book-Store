@@ -6,16 +6,7 @@ import { Book } from "../../../server/models/Book";
 
 import { Wrapper } from "../../components/~Wrapper";
 import Nav from "../../components/Nav";
-
-const BooksStyled = styled.div({
-  width: "100%",
-  height: 150,
-  fontSize: 60,
-  color: "white",
-  display: "flex",
-  alignItems: "center",
-  justifyContent: "center",
-});
+import { Header } from "../../components/Header";
 
 const BooksList = styled.ul({
   width: "100%",
@@ -59,7 +50,7 @@ function Books() {
   return (
     <Wrapper>
       <Nav></Nav>
-      <BooksStyled>Books!</BooksStyled>
+      <Header>Books!</Header>
       <BooksList key="booksList">
         {books.map((book) => {
           return (

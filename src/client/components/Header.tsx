@@ -7,5 +7,4 @@ export const Header = styled.div({
   color: "white",
   display: "flex",
   alignItems: "center",
-  justifyContent: "center",
 });
