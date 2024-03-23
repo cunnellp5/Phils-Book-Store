@@ -1,9 +1,14 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import {
+  createBrowserRouter,
+  RouterProvider,
+  useRoutes,
+} from "react-router-dom";
 
 import App from "./App";
 import Books from "./pages/books/Books";
+import Book from "./pages/books/Book";
 import Authors from "./pages/authors/Authors";
 
 const router = createBrowserRouter([
@@ -14,6 +19,10 @@ const router = createBrowserRouter([
   {
     path: "/books",
     element: <Books></Books>,
+  },
+  {
+    path: "/books/:id",
+    element: <Book></Book>,
   },
   {
     path: "/authors",

@@ -33,7 +33,7 @@ const BooksDataLabel = styled.p({
   fontWeight: "bold",
 });
 
-const BooksDataInfo = styled.p({
+const BooksDataInfo = styled.div({
   marginLeft: 8,
 });
 
