@@ -7,6 +7,7 @@ import Books from "./pages/books/Books";
 import Book from "./pages/books/Book";
 import Authors from "./pages/authors/Authors";
 import Author from "./pages/authors/Author";
+import EditBook from "./pages/books/EditBook";
 
 const router = createBrowserRouter([
   {
@@ -22,12 +23,28 @@ const router = createBrowserRouter([
     element: <Book></Book>,
   },
   {
+    path: "/books/:id/edit",
+    element: <EditBook></EditBook>,
+  },
+  {
+    path: "/books/delete",
+    element: <EditBook></EditBook>,
+  },
+  {
     path: "/authors",
     element: <Authors></Authors>,
   },
   {
     path: "/authors/:id",
     element: <Author />,
+  },
+  {
+    path: "/authors/:id/edit",
+    element: <EditBook></EditBook>,
+  },
+  {
+    path: "/authors/delete",
+    element: <EditBook></EditBook>,
   },
 ]);
 
