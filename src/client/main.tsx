@@ -10,6 +10,7 @@ import App from "./App";
 import Books from "./pages/books/Books";
 import Book from "./pages/books/Book";
 import Authors from "./pages/authors/Authors";
+import Author from "./pages/authors/Author";
 
 const router = createBrowserRouter([
   {
@@ -27,6 +28,10 @@ const router = createBrowserRouter([
   {
     path: "/authors",
     element: <Authors></Authors>,
+  },
+  {
+    path: "/authors/:id",
+    element: <Author />,
   },
 ]);
 
