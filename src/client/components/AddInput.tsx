@@ -3,6 +3,7 @@ import styled from "@emotion/styled";
 
 const Form = styled.form({
   width: "100%",
+  marginBottom: 48,
 });
 
 const Input = styled.input({
@@ -33,6 +34,7 @@ export const AddInput: FC<AddInputProps> = ({ onAdd }) => {
         onChange={(e) => setInput(e.target.value)}
         value={input}
         placeholder="Add a new todo item here"
+        autoFocus
       />
     </Form>
   );
