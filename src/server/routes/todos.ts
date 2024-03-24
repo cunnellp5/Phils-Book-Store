@@ -29,10 +29,12 @@ router.post("/", async (req, res) => {
 
 router.delete("/:id", async (req, res) => {
   try {
-    const { id } = req.params;
-    const todo = await Todo.findByPk(id);
-    await todo?.destroy();
-    res.sendStatus(200);
+    await Todo.destroy({
+      where: {
+        id: req.params.id,
+      },
+    });
+    res.status(200).json({ message: "Todo deleted" });
   } catch (error) {
     RoutesErrorHandler(res, error);
   }
@@ -40,10 +42,11 @@ router.delete("/:id", async (req, res) => {
 
 router.patch("/:id", async (req, res) => {
   try {
-    const { id } = req.params;
-    const { completed, description } = req.body;
-    const todo = await Todo.findByPk(id);
-    await todo?.update({ completed, description });
+    await Todo.update(req.body, {
+      where: {
+        id: req.params.id,
+      },
+    });
     res.sendStatus(201);
   } catch (error) {
     RoutesErrorHandler(res, error);
