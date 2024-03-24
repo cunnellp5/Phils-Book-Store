@@ -39,17 +39,21 @@ router.post("/", async (req, res) => {
 
 router.delete("/:id", async (req, res) => {
   try {
-    await Author.destroy({
+    const author = await Author.destroy({
       where: {
         id: req.params.id,
       },
     });
+    if (author === 0) {
+      res.status(404).json({ message: "Author not found" });
+    }
     res.status(200).json({ message: "Author deleted" });
   } catch (error) {
     RoutesErrorHandler(res, error);
   }
 });
 
+// TODO find by pk, then add to book, if needed
 router.patch("/:id", async (req, res) => {
   try {
     Author.update(req.body, {
