@@ -14,4 +14,13 @@ router.get("/", async (req, res) => {
   }
 });
 
+router.get("/:id", async (req, res) => {
+  try {
+    const author = await Author.findByPk(req.params.id);
+    res.json(author);
+  } catch (error: Error | unknown) {
+    RoutesErrorHandler(res, error);
+  }
+});
+
 export default router;
