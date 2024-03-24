@@ -8,7 +8,9 @@ const router = Router();
 
 router.get("/", async (req, res) => {
   try {
-    const authors = await Author.findAll();
+    const authors = await Author.findAll({
+      include: Book,
+    });
     res.json(authors);
   } catch (error: Error | unknown) {
     RoutesErrorHandler(res, error);

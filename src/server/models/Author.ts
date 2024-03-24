@@ -9,7 +9,7 @@ export interface Author {
   lastname: string;
   bio: string;
   img: string;
-  book: Book[];
+  books: Book[];
 }
 
 export function initAuthor(sequelize: Sequelize) {
