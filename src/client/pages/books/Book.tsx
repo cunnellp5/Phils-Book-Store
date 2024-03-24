@@ -1,17 +1,22 @@
-import React, { useState, useEffect, Fragment } from "react";
-import { useParams } from "react-router-dom";
-
-import * as BookAPI from "../../api/books";
-
-import { Wrapper } from "../../components/~Wrapper";
-import Nav from "../../components/Nav";
-import { Header } from "../../components/Header";
-
+import React, { Fragment, useEffect, useState } from "react";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { Book as BookType } from "../../../server/models/Book";
-import { useNavigate } from "react-router-dom";
+import * as BookAPI from "../../api/books";
+import { Header } from "../../components/Header";
+import Nav from "../../components/Nav";
+import { Wrapper } from "../../components/~Wrapper";
+import {
+  DataInfo,
+  DataLabel,
+  DataStyle,
+  ImgStyle,
+  ItemStyle,
+  ListStyle,
+} from "./Books";
 
 function Book() {
   const [book, setBook] = useState<BookType>();
+  const [loading, setLoading] = useState<Boolean>(true);
   const navigate = useNavigate();
 
   const { id } = useParams();
@@ -21,9 +26,12 @@ function Book() {
 
     try {
       const numberId = parseInt(id);
-      BookAPI.getBook(numberId).then(setBook);
+      BookAPI.getBook(numberId)
+        .then(setBook)
+        .then(() => setLoading(false));
     } catch (error) {
       console.error(error);
+      setLoading(false);
     }
   }, []);
 
@@ -31,6 +39,49 @@ function Book() {
     <Wrapper>
       <Nav></Nav>
       <Header>A Book</Header>
+      <ListStyle>
+        {!book ? (
+          <div>
+            no books, eat rocks
+            <Link to={"/books"}>bookies</Link>
+          </div>
+        ) : (
+          <ItemStyle key={`${book.id}-frag`}>
+            <ImgStyle src="https://picsum.photos/100/100" alt={book?.title} />
+            <div>
+              <DataStyle>
+                <DataLabel>
+                  <Link to={`/books/${book.id}`}>Title</Link>
+                </DataLabel>
+                <DataInfo>{book.title}</DataInfo>
+              </DataStyle>
+              <DataStyle>
+                <DataLabel>Genera</DataLabel>
+                <DataInfo>{book.genera}</DataInfo>
+              </DataStyle>
+              <DataStyle>
+                <DataLabel>
+                  Author{book.authors.length > 1 ? "s" : ""}
+                </DataLabel>
+                <DataInfo>
+                  {book.authors.map((author) => {
+                    return (
+                      <Fragment key={`${author.id}-frag`}>
+                        <p>
+                          <Link to={`/authors/${author.id}`}>
+                            {author.firstname} {author.lastname}
+                          </Link>
+                          {book.authors.length > 1 ? ", " : ""}
+                        </p>
+                      </Fragment>
+                    );
+                  })}
+                </DataInfo>
+              </DataStyle>
+            </div>
+          </ItemStyle>
+        )}
+      </ListStyle>
     </Wrapper>
   );
 }

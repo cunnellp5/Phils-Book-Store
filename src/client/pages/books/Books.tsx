@@ -9,11 +9,11 @@ import { Wrapper } from "../../components/~Wrapper";
 import Nav from "../../components/Nav";
 import { Header } from "../../components/Header";
 
-const BooksList = styled.ul({
+export const ListStyle = styled.ul({
   width: "100%",
 });
 
-const BooksItem = styled.li({
+export const ItemStyle = styled.li({
   display: "flex",
   flexDirection: "row",
   gap: 16,
@@ -25,19 +25,19 @@ const BooksItem = styled.li({
   marginBottom: 16,
 });
 
-const BooksData = styled.div({
+export const DataStyle = styled.div({
   marginBottom: 16,
 });
 
-const BooksDataLabel = styled.p({
+export const DataLabel = styled.p({
   fontWeight: "bold",
 });
 
-const BooksDataInfo = styled.div({
+export const DataInfo = styled.div({
   marginLeft: 8,
 });
 
-const BooksImg = styled.img({
+export const ImgStyle = styled.img({
   width: 100,
   height: 100,
   backgroundColor: "#ffcfb0",
@@ -45,7 +45,7 @@ const BooksImg = styled.img({
   borderRadius: 4,
 });
 
-const BooksLoading = styled.div({
+export const LoadingStyle = styled.div({
   color: "white",
   fontSize: 16,
 });
@@ -72,32 +72,32 @@ function Books() {
       <Nav></Nav>
       <Header>Books!</Header>
       {loading ? (
-        <BooksLoading>Loading...</BooksLoading>
+        <LoadingStyle>Loading...</LoadingStyle>
       ) : (
-        <BooksList key="booksList">
+        <ListStyle>
           {books.map((book) => {
             return (
-              <BooksItem key={`${book.id}-frag`}>
-                <BooksImg
+              <ItemStyle key={`${book.id}-frag`}>
+                <ImgStyle
                   src="https://picsum.photos/100/100"
                   alt={book.title}
                 />
                 <div>
-                  <BooksData>
-                    <BooksDataLabel>
+                  <DataStyle>
+                    <DataLabel>
                       <Link to={`/books/${book.id}`}>Title</Link>
-                    </BooksDataLabel>
-                    <BooksDataInfo>{book.title}</BooksDataInfo>
-                  </BooksData>
-                  <BooksData>
-                    <BooksDataLabel>Genera</BooksDataLabel>
-                    <BooksDataInfo>{book.genera}</BooksDataInfo>
-                  </BooksData>
-                  <BooksData>
-                    <BooksDataLabel>
+                    </DataLabel>
+                    <DataInfo>{book.title}</DataInfo>
+                  </DataStyle>
+                  <DataStyle>
+                    <DataLabel>Genera</DataLabel>
+                    <DataInfo>{book.genera}</DataInfo>
+                  </DataStyle>
+                  <DataStyle>
+                    <DataLabel>
                       Author{book.authors.length > 1 ? "s" : ""}
-                    </BooksDataLabel>
-                    <BooksDataInfo>
+                    </DataLabel>
+                    <DataInfo>
                       {book.authors.map((author) => {
                         return (
                           <Fragment key={`${author.id}-frag`}>
@@ -110,13 +110,13 @@ function Books() {
                           </Fragment>
                         );
                       })}
-                    </BooksDataInfo>
-                  </BooksData>
+                    </DataInfo>
+                  </DataStyle>
                 </div>
-              </BooksItem>
+              </ItemStyle>
             );
           })}
-        </BooksList>
+        </ListStyle>
       )}
     </Wrapper>
   );

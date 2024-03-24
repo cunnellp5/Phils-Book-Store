@@ -7,6 +7,7 @@ import { Header } from "../../components/Header";
 
 import { Author } from "../../../server/models/Author";
 import * as authorsAPI from "../../api/authors";
+import { Link } from "react-router-dom";
 
 function Authors() {
   const [authors, setAuthors] = useState<Author[]>([]);
@@ -18,13 +19,16 @@ function Authors() {
       console.error(error);
     }
   }, []);
+
   return (
     <Wrapper>
       <Nav></Nav>
       <Header>Authors!</Header>
       <ul>
         {authors.map((author) => (
-          <li key={author.id}>{author.firstname}</li>
+          <li key={author.id}>
+            <Link to={`/authors/${author.id}`}>{author.firstname}</Link>
+          </li>
         ))}
       </ul>
     </Wrapper>
