@@ -22,11 +22,15 @@ export const DataStyle = styled.div({
 
 export const DataLabel = styled.p({
   fontWeight: "bold",
+  paddingBottom: 2,
 });
 
-export const DataInfo = styled.div({
-  marginLeft: 8,
-});
+export const DataInfo = styled.div`
+  margin-left: 8px;
+  & a {
+    text-decoration: none;
+  }
+`;
 
 export const ImgStyle = styled.img({
   width: 100,

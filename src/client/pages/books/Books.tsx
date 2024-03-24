@@ -47,10 +47,10 @@ function Books() {
                 />
                 <div>
                   <DataStyle>
-                    <DataLabel>
-                      <Link to={`/books/${book.id}`}>Title</Link>
-                    </DataLabel>
-                    <DataInfo>{book.title}</DataInfo>
+                    <DataLabel>Title</DataLabel>
+                    <DataInfo>
+                      <Link to={`/books/${book.id}`}>{book.title}</Link>
+                    </DataInfo>
                   </DataStyle>
                   <DataStyle>
                     <DataLabel>Genera</DataLabel>

@@ -22,6 +22,14 @@ const Bio = styled.p({
   marginLeft: "8px",
 });
 
+const AuthorList = styled.p`
+  font-size: 16px;
+
+  & a {
+    text-decoration: none;
+  }
+`;
+
 function Authors() {
   const [authors, setAuthors] = useState<Author[]>([]);
 
@@ -66,10 +74,10 @@ function Authors() {
                     {author.books.map((book) => {
                       return (
                         <Fragment key={`${book.id}-frag`}>
-                          <p>
+                          <AuthorList>
                             <Link to={`/books/${book.id}`}>{book.title}</Link>
                             {author.books.length > 1 ? ", " : ""}
-                          </p>
+                          </AuthorList>
                         </Fragment>
                       );
                     })}
