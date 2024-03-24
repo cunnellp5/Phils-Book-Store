@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { LinkButtons } from "../components/~LinkButtons";
+import { LinkButtons } from "../styles/LinkButtons";
 
 function Nav() {
   return (

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import styled from "@emotion/styled";
 
-import { Wrapper } from "../../components/~Wrapper";
+import { Wrapper } from "../../styles/Wrapper";
 import Nav from "../../components/Nav";
 import { Header } from "../../components/Header";
 

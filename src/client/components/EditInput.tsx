@@ -1,5 +1,6 @@
 import React, { FC, useState } from "react";
 import styled from "@emotion/styled";
+import { ButtonsWrapper } from "../styles/ButtonsWrapper";
 
 const Form = styled.form({
   width: "100%",
@@ -37,12 +38,12 @@ export const EditInput: FC<EditInputProps> = ({
         value={input}
         placeholder={description}
       />
-      <div className="buttonsWrapper">
+      <ButtonsWrapper>
         <button type="submit">update</button>
         <button type="button" onClick={closeEditor}>
           nvm
         </button>
-      </div>
+      </ButtonsWrapper>
     </Form>
   );
 };

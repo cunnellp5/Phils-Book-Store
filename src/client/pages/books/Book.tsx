@@ -4,7 +4,7 @@ import { Book as BookType } from "../../../server/models/Book";
 import * as BookAPI from "../../api/books";
 import { Header } from "../../components/Header";
 import Nav from "../../components/Nav";
-import { Wrapper } from "../../components/~Wrapper";
+import { Wrapper } from "../../styles/Wrapper";
 import {
   DataInfo,
   DataLabel,
@@ -12,7 +12,7 @@ import {
   ImgStyle,
   ItemStyle,
   ListStyle,
-} from "./Books";
+} from "../../styles/DataStyles";
 
 function Book() {
   const [book, setBook] = useState<BookType>();

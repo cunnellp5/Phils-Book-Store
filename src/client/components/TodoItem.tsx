@@ -1,8 +1,8 @@
-import React, { FC, useState } from "react";
 import styled from "@emotion/styled";
+import React, { FC, useState } from "react";
 import { Todo } from "../../server/models/Todo";
+import { ButtonsWrapper } from "../styles/ButtonsWrapper";
 import { EditInput } from "./EditInput";
-import "./~TodoItem.css";
 
 export const Wrapper = styled.label({
   display: "flex",
@@ -97,10 +97,10 @@ export const TodoItem: FC<TodoItemProps> = ({
         onChange={handleToggle}
       />
       <Label checked={completed}>{description}</Label>
-      <div className="buttonsWrapper">
+      <ButtonsWrapper>
         <button onClick={handleEdit}>Edit</button>
         <button onClick={handleDelete}>❌</button>
-      </div>
+      </ButtonsWrapper>
     </Wrapper>
   );
 };

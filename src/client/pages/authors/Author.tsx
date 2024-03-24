@@ -4,7 +4,7 @@ import { Author as AuthorType } from "../../../server/models/Author";
 import * as authorAPI from "../../api/authors";
 import { Header } from "../../components/Header";
 import Nav from "../../components/Nav";
-import { Wrapper } from "../../components/~Wrapper";
+import { Wrapper } from "../../styles/Wrapper";
 
 function Author() {
   const [author, setAuthor] = useState<AuthorType>();

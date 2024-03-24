@@ -1,54 +1,19 @@
-import React, { useState, useEffect, Fragment } from "react";
-import styled from "@emotion/styled";
+import React, { Fragment, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-
-import * as BookAPI from "../../api/books";
 import { Book } from "../../../server/models/Book";
-
-import { Wrapper } from "../../components/~Wrapper";
-import Nav from "../../components/Nav";
+import * as BookAPI from "../../api/books";
 import { Header } from "../../components/Header";
-
-export const ListStyle = styled.ul({
-  width: "100%",
-});
-
-export const ItemStyle = styled.li({
-  display: "flex",
-  flexDirection: "row",
-  gap: 16,
-  borderRadius: 4,
-
-  backgroundColor: "#f9f9f9",
-  borderBottom: "1px solid #ccc",
-  padding: 16,
-  marginBottom: 16,
-});
-
-export const DataStyle = styled.div({
-  marginBottom: 16,
-});
-
-export const DataLabel = styled.p({
-  fontWeight: "bold",
-});
-
-export const DataInfo = styled.div({
-  marginLeft: 8,
-});
-
-export const ImgStyle = styled.img({
-  width: 100,
-  height: 100,
-  backgroundColor: "#ffcfb0",
-  fontSize: 12,
-  borderRadius: 4,
-});
-
-export const LoadingStyle = styled.div({
-  color: "white",
-  fontSize: 16,
-});
+import Nav from "../../components/Nav";
+import { Wrapper } from "../../styles/Wrapper";
+import {
+  DataInfo,
+  DataLabel,
+  DataStyle,
+  ImgStyle,
+  ItemStyle,
+  ListStyle,
+  LoadingStyle,
+} from "../../styles/DataStyles";
 
 function Books() {
   const [books, setBooks] = useState<Book[]>([]);
@@ -56,11 +21,9 @@ function Books() {
 
   useEffect(() => {
     try {
-      setTimeout(() => {
-        BookAPI.getBooks()
-          .then(setBooks)
-          .then(() => setLoading(false));
-      }, 250);
+      BookAPI.getBooks()
+        .then(setBooks)
+        .then(() => setLoading(false));
     } catch (err) {
       setLoading(false);
       console.log("failed to fetch books", err);
@@ -79,7 +42,7 @@ function Books() {
             return (
               <ItemStyle key={`${book.id}-frag`}>
                 <ImgStyle
-                  src="https://picsum.photos/100/100"
+                  src="https://picsum.photos/150/150"
                   alt={book.title}
                 />
                 <div>

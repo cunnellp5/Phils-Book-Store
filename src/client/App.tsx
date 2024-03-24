@@ -4,7 +4,7 @@ import { TodoItem } from "./components/TodoItem";
 import { TodoList } from "./components/TodoList";
 import { Header } from "./components/Header";
 
-import { Wrapper } from "./components/~Wrapper";
+import { Wrapper } from "./styles/Wrapper";
 import "./App.css";
 
 import * as TodoAPI from "./api/todos";
