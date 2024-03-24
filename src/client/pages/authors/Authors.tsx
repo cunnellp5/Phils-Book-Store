@@ -16,19 +16,8 @@ import {
   ItemStyle,
   ListStyle,
 } from "../../styles/DataStyles";
-
-const Bio = styled.p({
-  fontSize: "16px",
-  marginLeft: "8px",
-});
-
-const AuthorList = styled.p`
-  font-size: 16px;
-
-  & a {
-    text-decoration: none;
-  }
-`;
+import { Bio } from "../../styles/Bio";
+import { AuthorList } from "../../styles/AuthorList";
 
 function Authors() {
   const [authors, setAuthors] = useState<Author[]>([]);
@@ -55,27 +44,22 @@ function Authors() {
               />
               <div>
                 <DataStyle>
-                  <DataLabel>Name</DataLabel>
-                  <DataInfo>
+                  <DataLabel bold>
                     <Link to={`/authors/${author.id}`}>
                       {author.firstname} {author.lastname}
                     </Link>
-                  </DataInfo>
+                  </DataLabel>
                 </DataStyle>
                 <DataStyle>
-                  <DataLabel>Bio</DataLabel>
                   <Bio>{author.bio}</Bio>
                 </DataStyle>
                 <DataStyle>
-                  <DataLabel>
-                    Book{author.books.length > 1 ? "s" : ""}
-                  </DataLabel>
                   <DataInfo>
                     {author.books.map((book) => {
                       return (
                         <Fragment key={`${book.id}-frag`}>
                           <AuthorList>
-                            <Link to={`/books/${book.id}`}>{book.title}</Link>
+                            - <Link to={`/books/${book.id}`}>{book.title}</Link>
                             {author.books.length > 1 ? ", " : ""}
                           </AuthorList>
                         </Fragment>
@@ -88,13 +72,6 @@ function Authors() {
           );
         })}
       </ListStyle>
-      {/* <ul>
-        {authors.map((author) => (
-          <li key={author.id}>
-            <Link to={`/authors/${author.id}`}>{author.firstname}</Link>
-          </li>
-        ))}
-      </ul> */}
     </Wrapper>
   );
 }

@@ -50,17 +50,16 @@ function Book() {
             <ImgStyle src="https://picsum.photos/100/100" alt={book?.title} />
             <div>
               <DataStyle>
-                <DataLabel>
-                  <Link to={`/books/${book.id}`}>Title</Link>
+                <DataLabel bold>
+                  <h3>{book.title}</h3>
                 </DataLabel>
-                <DataInfo>{book.title}</DataInfo>
               </DataStyle>
               <DataStyle>
-                <DataLabel>Genera</DataLabel>
+                <DataLabel bold>Genera</DataLabel>
                 <DataInfo>{book.genera}</DataInfo>
               </DataStyle>
               <DataStyle>
-                <DataLabel>
+                <DataLabel bold>
                   Author{book.authors.length > 1 ? "s" : ""}
                 </DataLabel>
                 <DataInfo>

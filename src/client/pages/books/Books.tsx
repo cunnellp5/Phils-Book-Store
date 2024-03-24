@@ -47,28 +47,28 @@ function Books() {
                 />
                 <div>
                   <DataStyle>
-                    <DataLabel>Title</DataLabel>
-                    <DataInfo>
-                      <Link to={`/books/${book.id}`}>{book.title}</Link>
-                    </DataInfo>
+                    <DataLabel bold>
+                      <h3>
+                        <Link to={`/books/${book.id}`}>{book.title}</Link>
+                      </h3>
+                    </DataLabel>
                   </DataStyle>
                   <DataStyle>
-                    <DataLabel>Genera</DataLabel>
+                    <DataLabel bold>Genera</DataLabel>
                     <DataInfo>{book.genera}</DataInfo>
                   </DataStyle>
                   <DataStyle>
-                    <DataLabel>
+                    <DataLabel bold>
                       Author{book.authors.length > 1 ? "s" : ""}
                     </DataLabel>
                     <DataInfo>
-                      {book.authors.map((author) => {
+                      {book.authors.map((author, i) => {
                         return (
                           <Fragment key={`${author.id}-frag`}>
                             <p>
                               <Link to={`/authors/${author.id}`}>
                                 {author.firstname} {author.lastname}
                               </Link>
-                              {book.authors.length > 1 ? ", " : ""}
                             </p>
                           </Fragment>
                         );

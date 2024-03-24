@@ -20,10 +20,13 @@ export const DataStyle = styled.div({
   marginBottom: 16,
 });
 
-export const DataLabel = styled.p({
-  fontWeight: "bold",
+export const DataLabel = styled.p<{ bold: boolean }>(({ bold }) => ({
+  fontWeight: bold ? "bold" : "normal",
   paddingBottom: 2,
-});
+  "& a": {
+    textDecoration: "none",
+  },
+}));
 
 export const DataInfo = styled.div`
   margin-left: 8px;
