@@ -28,4 +28,36 @@ router.get("/:id", async (req, res) => {
   }
 });
 
+router.post("/", async (req, res) => {
+  try {
+    const results = await Author.create(req.body, {
+      include: Book,
+    });
+    res.status(201).json(results);
+  } catch (error) {}
+});
+
+router.delete("/:id", async (req, res) => {
+  try {
+    await Author.destroy({
+      where: {
+        id: req.params.id,
+      },
+    });
+    res.status(200).json({ message: "Author deleted" });
+  } catch (error) {
+    RoutesErrorHandler(res, error);
+  }
+});
+
+router.patch("/:id", async (req, res) => {
+  try {
+    Author.update(req.body, {
+      where: {
+        id: req.params.id,
+      },
+    });
+  } catch (error) {}
+});
+
 export default router;
