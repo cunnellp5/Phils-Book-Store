@@ -29,6 +29,30 @@ router.get("/:id", async (req, res) => {
   }
 });
 
+router.post("/", async (req, res) => {
+  try {
+    const newBook = await Book.create(req.body, {
+      include: Author,
+    });
+    res.status(201).json(newBook);
+  } catch (error) {
+    RoutesErrorHandler(res, error);
+  }
+});
+
+// TODO find by pk, then add to author, if needed
+router.patch("/:id", async (req, res) => {
+  try {
+    const bookToUpdate = await Book.findByPk(req.params.id);
+
+    if (!bookToUpdate) {
+      res.status(404).json({ message: "Book not found" });
+    }
+  } catch (error) {
+    RoutesErrorHandler(res, error);
+  }
+});
+
 router.delete("/:id", async (req, res) => {
   try {
     const deletedBook = await Book.destroy({
@@ -36,12 +60,10 @@ router.delete("/:id", async (req, res) => {
         id: req.params.id,
       },
     });
-
     if (deletedBook === 1) {
-      res.json({ message: "Book deleted" });
-    } else {
-      res.status(404).json({ message: "Book not found" });
+      res.status(200).json({ message: "Book deleted" });
     }
+    res.status(404).json({ message: "Book not found" });
   } catch (error) {
     RoutesErrorHandler(res, error);
   }
