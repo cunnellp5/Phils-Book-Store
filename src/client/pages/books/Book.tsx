@@ -13,8 +13,14 @@ import {
   ItemStyle,
   ListStyle,
 } from "../../styles/DataStyles";
+import {
+  BackButton,
+  DeleteItemButton,
+  EditItemButton,
+  ButtonsWrapper,
+} from "../../styles/ItemButtons";
 
-function Book() {
+export function Book() {
   const [book, setBook] = useState<BookType>();
   const [loading, setLoading] = useState<Boolean>(true);
   const navigate = useNavigate();
@@ -81,6 +87,17 @@ function Book() {
           </ItemStyle>
         )}
       </ListStyle>
+      <ButtonsWrapper>
+        <BackButton>
+          <Link to={`/books`}>Back</Link>
+        </BackButton>
+        <EditItemButton>
+          <Link to={`/books/${id}/edit`}>Edit</Link>
+        </EditItemButton>
+        <DeleteItemButton>
+          <Link to={`/books/${id}/delete`}>Delete</Link>
+        </DeleteItemButton>
+      </ButtonsWrapper>
     </Wrapper>
   );
 }
