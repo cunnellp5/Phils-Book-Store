@@ -31,8 +31,8 @@ const start = async () => {
   initAuthorBook(sequelize);
 
   // create relationships
-  Author.belongsToMany(Book, { through: AuthorBook });
-  Book.belongsToMany(Author, { through: AuthorBook });
+  Author.belongsToMany(Book, { through: AuthorBook, onDelete: "CASCADE" });
+  Book.belongsToMany(Author, { through: AuthorBook, onDelete: "CASCADE" });
 
   const { serve, app } = await createServer();
 
