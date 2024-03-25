@@ -1,5 +1,5 @@
 import React, { Fragment, useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Form, Link } from "react-router-dom";
 import { Book } from "../../../server/models/Book";
 import * as BookAPI from "../../api/books";
 import { Header } from "../../components/Header";
@@ -14,10 +14,53 @@ import {
   ListStyle,
   LoadingStyle,
 } from "../../styles/DataStyles";
+import styled from "@emotion/styled";
+
+const FormWrapper = styled.div({
+  color: "white",
+  display: "flex",
+  flexDirection: "column",
+  gap: 16,
+  marginBlock: 16,
+  "& label": {
+    display: "flex",
+    flexDirection: "column",
+    gap: 8,
+    "& input": {
+      padding: 8,
+      borderRadius: 4,
+      border: "1px solid #ccc",
+    },
+  },
+});
+
+const AddButton = styled.div({
+  width: "100%",
+  justifyContent: "flex-end",
+  display: "flex",
+  paddingBlock: 16,
+  alignItems: "center",
+
+  "& button": {
+    height: "50px",
+    padding: 8,
+    borderRadius: 4,
+    border: "1px solid #ccc",
+    backgroundColor: "white",
+    color: "#333",
+    cursor: "pointer",
+    "&:hover": {
+      backgroundColor: "#f0f0f0",
+    },
+  },
+});
 
 function Books() {
   const [books, setBooks] = useState<Book[]>([]);
   const [loading, setLoading] = useState<Boolean>(true);
+  const [addBook, setAddBook] = useState(false);
+  const [authorsList, setAuthorsList] = useState<string[]>([]);
+  const [author, setAuthor] = useState<string>("");
 
   useEffect(() => {
     try {
@@ -28,12 +71,101 @@ function Books() {
       setLoading(false);
       console.log("failed to fetch books", err);
     }
-  }, []);
+  }, [books]);
+
+  function removeAuthor(
+    e: React.MouseEvent<HTMLButtonElement, MouseEvent>,
+    i: number
+  ) {
+    e.preventDefault();
+    authorsList.splice(i, 1); // rm item from list
+    setAuthorsList(authorsList); // set new list
+  }
+
+  function handleAuthorChange(e: {
+    target: { value: React.SetStateAction<string> };
+  }) {
+    setAuthor(e?.target.value);
+  }
+
+  function updateAuthor(e: {
+    preventDefault: () => void;
+    target: { value: any };
+  }) {
+    // e.preventDefault();
+    if (author.length === 0) return;
+    setAuthorsList([...authorsList, author]);
+    setAuthor("");
+  }
+
+  function getBooks() {}
+
+  function handleAddBook() {
+    setAddBook(!addBook);
+  }
 
   return (
     <Wrapper>
       <Nav></Nav>
-      <Header>Books!</Header>
+      <AddButton>
+        <Header>Books!</Header>
+        <button onClick={handleAddBook}>{addBook ? "nvm" : "add"}</button>
+      </AddButton>
+
+      {addBook && (
+        <Form>
+          <FormWrapper>
+            Add a book:
+            <label htmlFor="title">
+              Title
+              <input
+                placeholder="add title"
+                type="text"
+                id="title"
+                required
+                name="title"
+              />
+            </label>
+            <label htmlFor="genera">
+              genera
+              <input
+                placeholder="add genera"
+                type="text"
+                id="genera"
+                required
+                name="genera"
+              />
+            </label>
+            <label htmlFor="author">
+              author(s)
+              <ul>
+                {authorsList.map((author, i) => (
+                  <li key={i}>
+                    {author}&nbsp;
+                    <button type="button" onClick={(e) => removeAuthor(e, i)}>
+                      x
+                    </button>
+                  </li>
+                ))}
+              </ul>
+              <input
+                placeholder="add author"
+                type="text"
+                id="author"
+                name="author"
+                value={author}
+                required
+                onChange={handleAuthorChange}
+              />
+              <button type="button" onClick={updateAuthor}>
+                add author
+              </button>
+            </label>
+            <button>submit</button>
+          </FormWrapper>
+        </Form>
+      )}
+
       {loading ? (
         <LoadingStyle>Loading...</LoadingStyle>
       ) : (
