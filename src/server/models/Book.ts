@@ -8,7 +8,8 @@ export interface Book {
   title: string;
   genera: string;
   img: string;
-  authors: Author[];
+  authors: [{ firstname: string; lastname: string; id?: number }];
+  addAuthors: (authors: Author) => void;
 }
 
 export function initBook(sequelize: Sequelize) {
