@@ -13,12 +13,7 @@ import {
   ItemStyle,
   ListStyle,
 } from "../../styles/DataStyles";
-import {
-  BackButton,
-  DeleteItemButton,
-  EditItemButton,
-  ButtonsWrapper,
-} from "../../styles/ItemButtons";
+import { ButtonsWrapper } from "../../styles/ItemButtons";
 
 export function Book() {
   const [book, setBook] = useState<BookType>();
@@ -88,15 +83,15 @@ export function Book() {
         )}
       </ListStyle>
       <ButtonsWrapper>
-        <BackButton>
+        <button>
           <Link to={`/books`}>Back</Link>
-        </BackButton>
-        <EditItemButton>
+        </button>
+        <button>
           <Link to={`/books/${id}/edit`}>Edit</Link>
-        </EditItemButton>
-        <DeleteItemButton>
+        </button>
+        <button>
           <Link to={`/books/${id}/delete`}>Delete</Link>
-        </DeleteItemButton>
+        </button>
       </ButtonsWrapper>
     </Wrapper>
   );
