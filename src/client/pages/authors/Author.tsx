@@ -15,12 +15,7 @@ import {
 } from "../../styles/DataStyles";
 import { Bio } from "../../styles/Bio";
 import { AuthorList } from "../../styles/AuthorList";
-import {
-  BackButton,
-  ButtonsWrapper,
-  DeleteItemButton,
-  EditItemButton,
-} from "../../styles/ItemButtons";
+import { ButtonsWrapper } from "../../styles/ItemButtons";
 
 function Author() {
   const [author, setAuthor] = useState<AuthorType>();
@@ -80,15 +75,15 @@ function Author() {
         </ItemStyle>
       </ListStyle>
       <ButtonsWrapper>
-        <BackButton>
+        <button>
           <Link to={`/authors`}>Back</Link>
-        </BackButton>
-        <EditItemButton>
+        </button>
+        <button>
           <Link to={`/authors/${id}/edit`}>Edit</Link>
-        </EditItemButton>
-        <DeleteItemButton>
+        </button>
+        <button>
           <Link to={`/authors/${id}/delete`}>Delete</Link>
-        </DeleteItemButton>
+        </button>
       </ButtonsWrapper>
     </Wrapper>
   );
