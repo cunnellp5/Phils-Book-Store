@@ -14,6 +14,11 @@ import {
   ListStyle,
 } from "../../styles/DataStyles";
 import { ButtonsWrapper } from "../../styles/ItemButtons";
+import styled from "@emotion/styled";
+
+const BigFont = styled.span({
+  fontSize: 24,
+});
 
 export function Book() {
   const [book, setBook] = useState<BookType>();
@@ -36,6 +41,19 @@ export function Book() {
     }
   }, []);
 
+  function handleDelete() {
+    if (!id) return;
+
+    confirm("You sure about that??");
+
+    try {
+      const numberId = parseInt(id);
+      BookAPI.deleteBook(numberId).then(() => navigate("/books"));
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
   return (
     <Wrapper>
       <Nav></Nav>
@@ -52,7 +70,7 @@ export function Book() {
             <div>
               <DataStyle>
                 <DataLabel bold>
-                  <h3>{book.title}</h3>
+                  <BigFont>{book.title}</BigFont>
                 </DataLabel>
               </DataStyle>
               <DataStyle>
@@ -89,9 +107,7 @@ export function Book() {
         <button>
           <Link to={`/books/${id}/edit`}>Edit</Link>
         </button>
-        <button>
-          <Link to={`/books/${id}/delete`}>Delete</Link>
-        </button>
+        <button onClick={handleDelete}>delete</button>
       </ButtonsWrapper>
     </Wrapper>
   );
