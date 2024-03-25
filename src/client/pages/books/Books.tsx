@@ -16,6 +16,10 @@ import {
 } from "../../styles/DataStyles";
 import styled from "@emotion/styled";
 
+const BigFont = styled.span({
+  fontSize: 24,
+});
+
 const FormWrapper = styled.div({
   color: "white",
   display: "flex",
@@ -71,7 +75,7 @@ function Books() {
       setLoading(false);
       console.log("failed to fetch books", err);
     }
-  }, [books]);
+  }, []);
 
   function removeAuthor(
     e: React.MouseEvent<HTMLButtonElement, MouseEvent>,
@@ -98,7 +102,27 @@ function Books() {
     setAuthor("");
   }
 
-  function getBooks() {}
+  function submitBook(e: any) {
+    e.preventDefault();
+    const form = e.target;
+
+    const formData = new FormData(form);
+
+    const data = {
+      title: formData.get("title") as string,
+      genera: formData.get("genera") as string,
+      authors: authorsList,
+      img: formData.get("img"),
+    };
+
+    BookAPI.addBook(data)
+      .then((book) => {
+        setBooks([...books, book]);
+      })
+      .then(() => {
+        setAddBook(false);
+      });
+  }
 
   function handleAddBook() {
     setAddBook(!addBook);
@@ -113,7 +137,7 @@ function Books() {
       </AddButton>
 
       {addBook && (
-        <Form>
+        <Form onSubmit={submitBook}>
           <FormWrapper>
             Add a book:
             <label htmlFor="title">
@@ -136,6 +160,16 @@ function Books() {
                 name="genera"
               />
             </label>
+            <label htmlFor="img">
+              img
+              <input
+                placeholder="add img"
+                type="text"
+                id="img"
+                required
+                name="img"
+              />
+            </label>
             <label htmlFor="author">
               author(s)
               <ul>
@@ -154,14 +188,13 @@ function Books() {
                 id="author"
                 name="author"
                 value={author}
-                required
                 onChange={handleAuthorChange}
               />
               <button type="button" onClick={updateAuthor}>
                 add author
               </button>
             </label>
-            <button>submit</button>
+            <button type="submit">submit</button>
           </FormWrapper>
         </Form>
       )}
@@ -180,9 +213,9 @@ function Books() {
                 <div>
                   <DataStyle>
                     <DataLabel bold>
-                      <h3>
+                      <BigFont>
                         <Link to={`/books/${book.id}`}>{book.title}</Link>
-                      </h3>
+                      </BigFont>
                     </DataLabel>
                   </DataStyle>
                   <DataStyle>
