@@ -12,7 +12,7 @@ router.get("/", async (req, res) => {
       include: Author,
       order: [["title", "ASC"]],
     });
-    res.json(books);
+    return res.json(books);
   } catch (error) {
     RoutesErrorHandler(res, error);
   }
@@ -23,18 +23,52 @@ router.get("/:id", async (req, res) => {
     const book = await Book.findByPk(req.params.id, {
       include: Author,
     });
-    res.json(book);
+    return res.json(book);
   } catch (error) {
     RoutesErrorHandler(res, error);
   }
 });
 
 router.post("/", async (req, res) => {
+  if (
+    !req.body.title ||
+    !req.body.genera ||
+    !req.body.authors ||
+    !req.body.img
+  ) {
+    res.status(400).json({ message: "Missing required fields" });
+  }
+
   try {
-    const newBook = await Book.create(req.body, {
-      include: Author,
-    });
-    res.status(201).json(newBook);
+    const { title, genera, authors, img } = req.body;
+
+    const newBook = await Book.create({ title, genera, img });
+
+    const authorsNames = authors.reduce(
+      (acc: [{ firstname: string; lastname: string }], author: string) => {
+        acc.push({
+          firstname: author.split(" ")[0],
+          lastname: author.split(" ")[1],
+        });
+        return acc;
+      },
+      []
+    );
+
+    for (const names of authorsNames) {
+      const foundAuthor = await Author.findOne({
+        where: {
+          firstname: names.firstname,
+          lastname: names.lastname,
+        },
+      });
+
+      if (foundAuthor) {
+        newBook.addAuthors(foundAuthor);
+      }
+    }
+
+    return res.status(201).json(newBook);
   } catch (error) {
     RoutesErrorHandler(res, error);
   }
@@ -61,9 +95,9 @@ router.delete("/:id", async (req, res) => {
       },
     });
     if (deletedBook === 1) {
-      res.status(200).json({ message: "Book deleted" });
+      return res.status(200).json({ message: "Book deleted" });
     }
-    res.status(404).json({ message: "Book not found" });
+    return res.status(404).json({ message: "Book not found" });
   } catch (error) {
     RoutesErrorHandler(res, error);
   }
