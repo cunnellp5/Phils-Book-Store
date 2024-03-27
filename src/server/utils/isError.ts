@@ -1,6 +1,6 @@
 import { Response } from "express-serve-static-core";
 
-class CustomError extends Error {
+class RouteError extends Error {
   status: number;
 
   constructor(message: string, status: number) {
