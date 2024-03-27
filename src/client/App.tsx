@@ -1,15 +1,16 @@
 import React, { useCallback, useEffect, useState } from "react";
 import { AddInput } from "./components/AddInput";
+import { Header } from "./components/Header";
 import { TodoItem } from "./components/TodoItem";
 import { TodoList } from "./components/TodoList";
-import { Header } from "./components/Header";
 
-import { Wrapper } from "./styles/Wrapper";
 import "./App.css";
+import { Wrapper } from "./styles/Wrapper";
 
-import * as TodoAPI from "./api/todos";
 import { Todo } from "../server/models/Todo";
+import * as TodoAPI from "./api/todos";
 import Nav from "./components/Nav";
+import WindowedList from "./components/WindoList";
 
 function App() {
   const [todos, setTodos] = useState<Todo[]>([]);
@@ -81,6 +82,8 @@ function App() {
           />
         ))}
       </TodoList>
+
+      <WindowedList></WindowedList>
     </Wrapper>
   );
 }
